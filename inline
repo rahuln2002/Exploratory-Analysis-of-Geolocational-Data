@@ -1,0 +1,85 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "97cb80cd",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "import missingno as mn\n",
+    "from sklearn import cluster, preprocessing\n",
+    "import scipy \n",
+    "import seaborn as sns\n",
+    "import folium\n",
+    "import geopy"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "5c0d4af7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dataset=pd.read_csv(\"goibibo_com-travel_sample.csv\")\n",
+    "dataset.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "4bc4f100",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "dataset.columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "402ec44f",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "z= [\"latitude\",\"longitude\"]\n",
+    "data= dataset[z]\n",
+    "df=pd.DataFrame(data)\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "fdd3480e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df.isna().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "9a4b891a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "colors=[\"red\", \"blue\"]\n",
+    "plt.figure(figsize=(15,5))\n",
+    "box = plt.boxplot(df, labels=z, patch_artist=True)\n",
+    "for patch, color in zip(box['boxes'], colors):\n",
+    "    patch.set_facecolor(color)\n",
+    "plt.xticks(rotation=45, ha='right')\n",
+    "plt.show()"
+   ]
+  }
+ ],
+ "metadata": {},
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
